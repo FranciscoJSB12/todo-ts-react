@@ -1,12 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] })
+import { Roboto } from '@next/font/google';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'todo-app',
   description: 'React + TypeScript',
 }
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: '400'
+})
 
 export default function RootLayout({
   children,
@@ -15,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

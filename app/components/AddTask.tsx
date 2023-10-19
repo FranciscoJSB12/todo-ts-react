@@ -1,32 +1,38 @@
 import React, { useState } from "react";
+import { useDipatchContext } from "../context/TasksContext";
+import { TaskAction } from "../reducers/tasks/tasksReducer";
+import { ACTION_TYPE } from "../reducers/tasks/actionTypes";
 
-interface AddTaskProps {
-  onAddTask: (text: string) => void
-}
-
-export const AddTask = ({ onAddTask }: AddTaskProps) => {
+export const AddTask = () => {
+  const dispatch: React.Dispatch<TaskAction> = useDipatchContext();
   const [text, setText] = useState("");
 
-  const handleTextChange = (e:React.ChangeEvent<HTMLInputElement>) => { 
+  const onTextChange = (e:React.ChangeEvent<HTMLInputElement>): void => { 
     setText(e.target.value); 
   }
 
-  const handleAddTask = () => {
+  const onAddTask = (): void => {
     if(text) {
-      onAddTask(text);
+      dispatch({
+        type: ACTION_TYPE.ADDED,
+        id: nextId++,
+        text: text
+      });
       setText("");
     }
   }
 
   return (
-    <section>
+    <article>
         <input 
           type="text" 
           placeholder="Add task"
           value={text}
-          onChange={handleTextChange}
+          onChange={onTextChange}
         />{' '}
-        <button onClick={handleAddTask}>Add</button>
-    </section>
+        <button onClick={onAddTask}>Add</button>
+    </article>
   );
 }
+
+let nextId: number = 3;

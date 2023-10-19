@@ -1,13 +1,15 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import type { TaskType } from "../context/TasksContext";
+import { Task  } from "./Task";
+import { useTasks } from "../context/TasksContext";
 
-interface TaskListProps {
-    children: ReactNode
-}
-
-export const TaskList = ({ children }:TaskListProps) => {
+export const TaskList = () => {
+    const tasks: TaskType[] = useTasks();
+    const viewTasks: React.JSX.Element[] = tasks.map(t => <Task key={t.id} task={t}/>);
+    
     return (
-        <section>
-            { children }
-        </section>
+        <article>
+            {viewTasks}
+        </article>
     );
 }

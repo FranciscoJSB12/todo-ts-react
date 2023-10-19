@@ -1,10 +1,10 @@
-import { TaskType } from "../../page";
+import type { TaskType } from "../../context/TasksContext";
 import { ACTION_TYPE } from "./actionTypes";
 
-type TaskAction = 
-  | { type: "added", id: number, text:string}
-  | { type: "changed", task: TaskType}
-  | { type: "deleted", id: number}
+export type TaskAction = 
+  | { type: ACTION_TYPE.ADDED, id: number, text:string}
+  | { type: ACTION_TYPE.CHANGED, task: TaskType}
+  | { type: ACTION_TYPE.DELETED, id: number}
 
 export const tasksReducer = (tasks: TaskType[], action:TaskAction) => {
     switch(action.type) {
