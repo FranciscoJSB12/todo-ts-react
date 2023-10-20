@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Roboto } from '@next/font/google';
+import { Quicksand } from 'next/font/google';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   description: 'React + TypeScript',
 }
 
-const roboto = Roboto({
+const quicksand = Quicksand({
   subsets: ['latin'],
-  weight: '400'
-})
+  weight: ['400', '700']
+});
 
 export default function RootLayout({
   children,
@@ -19,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={quicksand.className}>
+        {children}
+      </body>
     </html>
   )
 }

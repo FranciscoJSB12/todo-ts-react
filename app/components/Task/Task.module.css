@@ -1,0 +1,25 @@
+.TaskContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.TaskEdit {
+    border: none;  
+    border-bottom: 1px solid #ccc;
+    padding: 0px 0px 4px 4px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.TaskEdit:focus {
+    outline: none;
+}
+
+.TaskButton {
+    background-color: #FFF;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import type { TaskType } from "../context/TasksContext";
-import { ACTION_TYPE } from "../reducers/tasks/actionTypes";
-import { TaskAction } from "../reducers/tasks/tasksReducer";
-import { useDipatchContext } from "../context/TasksContext";
+import type { TaskType } from "../../context/TasksContext";
+import { ACTION_TYPE } from "../../reducers/tasks/actionTypes";
+import type { TaskAction } from "../../reducers/tasks/tasksReducer";
+import { useDipatchContext } from "../../context/TasksContext";
+import styles from "./Task.module.css";
 
 interface TaskProps {
   task: TaskType
@@ -34,28 +35,63 @@ export const Task = ({ task }: TaskProps) => {
     }); 
   }
   
+  const onSaveTaskByEnter = (e: React.KeyboardEvent<HTMLInputElement>):void => {
+    if (e.key === "Enter") {
+      setIsEditing(false);
+    }
+  }
+
+  const choseButtons = (button: React.JSX.Element): React.JSX.Element => {
+    return (
+      <div>
+        {button}
+        <button 
+          onClick={onDeleteTask}
+          className={styles.TaskButton}
+        >Delete</button>
+      </div>
+    );
+  }
+  
   let taskContent: React.JSX.Element;
+  let neededButton: React.JSX.Element;
   
   if (isEditing) {
+    neededButton = (
+      <button 
+        onClick={() => setIsEditing(false)}
+        className={styles.TaskButton}
+      >Save</button>
+    );
+
     taskContent = (<>
        <input 
           type="text" 
           value={task.text}
           onChange={onChangeText}
+          onKeyDown={onSaveTaskByEnter}
+          className={styles.TaskEdit}
         />
-        <button onClick={() => setIsEditing(false)}>Save</button>
+        {choseButtons(neededButton)}
     </>);
   } else {
+    neededButton = (
+      <button 
+        onClick={() => setIsEditing(true)}
+        className={styles.TaskButton}
+      >Edit</button>
+    );
+
     taskContent = (<>
        <label 
             htmlFor={`task${task.id}`}
-        >{task.text}</label>{' '}
-        <button onClick={() => setIsEditing(true)}>Edit</button>{' '}
+        >{task.text}</label>
+        {choseButtons(neededButton)}
     </>);
   }
 
   return (
-    <div>
+    <div className={styles.TaskContainer}>
         <input 
             type="checkbox" 
             id={`task${task.id}`} 
@@ -64,7 +100,6 @@ export const Task = ({ task }: TaskProps) => {
             onChange={onChangeCheck}
         />
         {taskContent}
-        <button onClick={onDeleteTask}>Delete</button>
     </div>
   );
 }

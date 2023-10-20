@@ -1,0 +1,11 @@
+.TaskHeaderTitle {
+    font-size: 20px;
+    font-weight: 700;
+    font-style: italic;
+    width: 100%;
+}
+
+.TaskHeaderSubTitle {
+    font-size: 16px;
+    font-weight: 400;
+}

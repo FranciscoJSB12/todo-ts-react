@@ -1,0 +1,25 @@
+.AddTaskSection {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.AddTaskInput {
+    padding: 6px 18px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.AddTaskInput:focus {
+    outline: none;
+}
+
+.AddTaskButton {
+    background-color: #FFF;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
